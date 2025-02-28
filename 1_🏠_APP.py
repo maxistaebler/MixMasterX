@@ -25,7 +25,7 @@ DEFAULT_COCKTAILS = {
 if "cocktails" not in st.session_state:
     st.session_state["cocktails"] = DEFAULT_COCKTAILS
 
-# Add custom CSS for clickable cards
+# Add custom CSS for clickable cards and centered buttons
 st.markdown("""
     <style>
     .cocktail-card {
@@ -43,11 +43,21 @@ st.markdown("""
         text-align: center;
         padding: 2rem 0;
     }
+    div[data-testid="column"] {
+        display: flex;
+        justify-content: center;
+    }
+    div.stButton > button {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
     </style>
 """, unsafe_allow_html=True)
 
 # Zentrierter Titel
 st.markdown("<h1 class='centered-title'>Cocktail / Long-Drink-Auswahl 🍸</h1>", unsafe_allow_html=True)
+st.divider()
 
 # Verwende die Rezepte aus dem Admin-Bereich
 if "recipes" not in st.session_state:
@@ -73,10 +83,25 @@ else:
                 cocktail_name, recipe_data = cocktails[cocktail_idx]
                 try:
                     st.image(recipe_data["image"], use_container_width=True)
-                    col1, col2, col3 = st.columns([1, 2, 1])
+                    # Adjusted column ratios for better centering
+                    col1, col2, col3 = st.columns([2, 3, 2])
                     with col2:
-                        if st.button(cocktail_name, key=f"btn_{cocktail_idx}"):
-                            st.json(recipe_data["ingredients"])
+                        if st.button(cocktail_name, key=f"btn_{cocktail_idx}", type="primary"):
+                            # Show recipe details
+                            st.write(f"\nGlasgröße: {st.session_state['glass_size']}ml")
+                            st.write("\nRezept:")
+                            
+                            # Create a formatted recipe dictionary
+                            recipe_details = {}
+                            for ing, percentage in recipe_data["ingredients"].items():
+                                ml_amount = (percentage / 100) * st.session_state["glass_size"]
+                                recipe_details[ing] = {
+                                    "percentage": f"{percentage:.1f}%",
+                                    "amount": f"{ml_amount:.1f}ml"
+                                }
+                            
+                            # Display the recipe
+                            st.json(recipe_details)
                             st.success(f"Du hast {cocktail_name} ausgewählt! Prost! 🍹")
                 except Exception as e:
                     st.error(f"Bild für {cocktail_name} konnte nicht geladen werden")
