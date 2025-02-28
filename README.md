@@ -157,5 +157,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Images are automatically resized to maintain consistent layout
 - All recipes must total exactly 100%
 - Glass size affects all cocktails globally
-```
-
