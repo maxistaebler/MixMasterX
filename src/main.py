@@ -27,6 +27,9 @@ class CocktailDisplayApp:
         
         # Load and display the images
         self.load_images()
+
+        # Full screen
+        self.root.attributes("-fullscreen", True)
         
     def load_images(self):
         # Get the path to the assets folder
