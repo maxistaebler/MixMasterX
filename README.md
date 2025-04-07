@@ -157,3 +157,40 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Images are automatically resized to maintain consistent layout
 - All recipes must total exactly 100%
 - Glass size affects all cocktails globally
+
+# MixMasterX Cocktail Display
+
+A simple Tkinter application designed for a Waveshare 4.3-inch display (800x430 resolution) mounted on a Raspberry Pi. The application displays three cocktail images from the assets folder.
+
+## Requirements
+
+- Python 3.6+
+- Pillow (PIL Fork)
+
+## Installation
+
+1. Clone this repository
+2. Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Running the Application
+
+To run the application, execute the following command:
+
+```bash
+python src/main.py
+```
+
+## Display Configuration
+
+This application is optimized for a Waveshare 4.3-inch display with a resolution of 800x430 pixels. If you're using a different display, you may need to adjust the window size in the code.
+
+## Assets
+
+The application uses the following images from the assets folder:
+- gin_tonic.jpg
+- wildberry_lillet.jpg
+- aperol_spritz.jpg
